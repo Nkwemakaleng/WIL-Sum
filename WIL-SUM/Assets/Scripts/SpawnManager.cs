@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -9,8 +11,13 @@ public class SpawnManager : MonoBehaviour
   public Color gizmosColor;
 
   public GameObject targetObject;
+
+  public GameObject spawnTargetObject;
   
   public GameObject Object;
+
+  public GameObject Object1;
+  public GameObject Object2;
 
   public int objectCount;
     // Start is called before the first frame update
@@ -53,8 +60,8 @@ public class SpawnManager : MonoBehaviour
     {
         Vector3 gizmosPos = new Vector3(targetObject.transform.position.x, targetObject.transform.position.y,0);
         Vector3 SpawnPos = gizmosPos + new Vector3(Random.Range(-spawnerSize.x / 2, spawnerSize.x / 2),
-            Random.Range(-spawnerSize.y / 2, spawnerSize.y / 2), 12);
-        Instantiate(Object, SpawnPos, Quaternion.identity);
+            Random.Range(-spawnerSize.y / 2, spawnerSize.y / 2), 0);
+        Instantiate(spawnTargetObject, SpawnPos, Quaternion.identity);
         objectCount -= 1;
         Debug.Log("Object Spawned");
         yield return new WaitForSeconds(1f);
@@ -66,12 +73,13 @@ public class SpawnManager : MonoBehaviour
         {
             Gizmos.color = gizmosColor;
             Gizmos.DrawSphere(targetObject.transform.position, spawnerSize.x/2);
-            
         }
     }
 
    private void unitSelection(GameObject Object)
    {
-       
+       targetObject = Object;
    }
+   
+   
 }
