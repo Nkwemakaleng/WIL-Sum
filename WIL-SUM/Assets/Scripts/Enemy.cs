@@ -7,48 +7,74 @@ public class Enemy : MonoBehaviour
     public Units units;
     public Money money;
     public int enemyHealth = 300;
-    public int bossHealth = 1000;
+    public int bossHealth = 20;
 
     public IEnumerator MinionHealth()
     {
-        while (enemyHealth < 0)
+        while (enemyHealth > 0)
         {
             enemyHealth -= (units.numSmall * units.dmgSmall);
             enemyHealth -= (units.numMedium * units.dmgMedium);
             enemyHealth -= (units.numLarge * units.dmgLarge);
             yield return new WaitForSeconds(1);
+            Debug.Log(enemyHealth);
+           
         }
-        money.moneyValue += 20;
+        money.index2 += 10;
         enemyAlive = false;
     }
 
     public IEnumerator BossHealth()
     {
-        while (enemyHealth < 0)
+        while (bossHealth > 0)
         {
-            enemyHealth -= (units.numSmall * units.dmgSmall-1);
-            enemyHealth -= (units.numMedium * units.dmgMedium-2);
-            enemyHealth -= (units.numLarge * units.dmgLarge-3);
+            bossHealth = bossHealth - (units.numSmall * units.dmgSmall);
+            bossHealth = bossHealth -(units.numMedium * units.dmgMedium);
+            bossHealth = bossHealth -(units.numLarge * units.dmgLarge);
             yield return new WaitForSeconds(1);
+            Debug.Log(bossHealth);
+            
         }
-        money.moneyValue += 50;
+        money.index2 += 20;
         enemyAlive = false;
     }
 
-    private void Awake()
+    private void OnTriggerStay(Collider other)
     {
         if (gameObject.CompareTag("Boss"))
         {
-            StartCoroutine(BossHealth());
+            if (other.CompareTag("SmallUnit"))
+            {
+                StartCoroutine(BossHealth());
+            }
+            else if (other.CompareTag("MediumUnit"))
+            {
+                StartCoroutine(BossHealth());
+            }
+            else if (other.CompareTag("LargeUnit"))
+            {
+                StartCoroutine(BossHealth());
+            }
         }
-        else
+        else if (gameObject.CompareTag("Minion"))
         {
-            StartCoroutine(MinionHealth());
+            if (other.CompareTag("SmallUnit"))
+            {
+                StartCoroutine(MinionHealth());
+            }
+            else if (other.CompareTag("MediumUnit"))
+            {
+                StartCoroutine(MinionHealth());
+            }
+            else if (other.CompareTag("LargeUnit"))
+            {
+                StartCoroutine(MinionHealth()); 
+            }
         }
     }
     private void Update()
     {
-        if (!enemyAlive)
+        if (!this.enemyAlive)
         {
             Destroy(this.gameObject);
         }

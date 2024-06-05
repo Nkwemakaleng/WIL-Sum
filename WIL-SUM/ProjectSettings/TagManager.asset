@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Boss
   - Minion
+  - SmallUnit
+  - MediumUnit
+  - LargeUnit
   layers:
   - Default
   - TransparentFX
