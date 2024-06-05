@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Money : MonoBehaviour
 {
-    public int moneyValue = 50;
-
+    public int moneyValue = 15;
+    int index2 = 15;
     public IEnumerator MoneyPassive()
     {
         int index = 3;
+        index2 = 15;
         while (true)
         {
-            moneyValue = moneyValue + 1;
+            index2++;
             yield return new WaitForSeconds(index);
+            moneyValue = index2;
             Debug.Log(moneyValue);
         }
     }
@@ -20,11 +22,5 @@ public class Money : MonoBehaviour
     void Start()
     {
         StartCoroutine(MoneyPassive());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
     }
 }
