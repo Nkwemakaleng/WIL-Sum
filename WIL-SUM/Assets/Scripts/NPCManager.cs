@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class NPCManager : MonoBehaviour
 {
+
+	[SerializeField]
+	private Transform entryPoints;
     
     public GameObject npcPrefab; // The NPC prefab to be instantiated
-    public Transform[] entryPoints; // Points where NPCs will enter
+	
+    public Transform entryPoint; // Points where NPCs will enter
     public Transform interactionPoint; // Point where NPCs will interact with the player
     public float spawnInterval = 5.0f; // Time interval between NPC spawns
     public float moveSpeed = 2.0f; // Speed at which NPCs move
@@ -28,7 +32,7 @@ public class NPCManager : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
 
             // Select a random entry point
-            Transform entryPoint = entryPoints[Random.Range(0, entryPoints.Length)];
+            Transform entryPoint = entryPoints;
             GameObject newNPC = Instantiate(npcPrefab, entryPoint.position, Quaternion.identity);
             activeNPCs.Add(newNPC);
 
