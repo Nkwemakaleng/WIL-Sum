@@ -1,37 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using System.IO;
 
-[System.Serializable]
-public class GameSaveData
-{
-    public int totalPoints;
-    public int officerCount;
-    public float currentDifficulty;
-    public List<SerializableCrimeReport> activeReports;
-    public List<SerializableOfficer> officers;
-}
 
-[System.Serializable]
-public class SerializableCrimeReport
-{
-    public string id;
-    public int crimeLevel;
-    public float progressBar;
-    public List<string> assignedOfficerIds;
-}
-
-[System.Serializable]
-public class SerializableOfficer
-{
-    public string id;
-    public bool isAvailable;
-    public string currentReportId;
-}
 
 public class SaveLoadManager : MonoBehaviour
 {
     private const string SAVE_KEY = "CrimeGameSave";
+    
+    [System.Serializable]
+    public class GameSaveData
+    {
+        public int totalPoints;
+        public int officerCount;
+        public float currentDifficulty;
+        public List<SerializableCrimeReport> activeReports;
+        public List<SerializableOfficer> officers;
+    }
+
+    [System.Serializable]
+    public class SerializableCrimeReport
+    {
+        public string id;
+        public int crimeLevel;
+        public float progressBar;
+        public List<string> assignedOfficerIds;
+    }
+
+    [System.Serializable]
+    public class SerializableOfficer
+    {
+        public string id;
+        public bool isAvailable;
+        public string currentReportId;
+    }
 
     public void SaveGame()
     {

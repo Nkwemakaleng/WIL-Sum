@@ -60,13 +60,18 @@ public class NPCController : MonoBehaviour
     {
         hasReported = true;
         string dialogue = data.dialogueOptions[UnityEngine.Random.Range(0, data.dialogueOptions.Length)];
-        
+    
         // Generate crime report through the management system
-        CrimeManagementSystem.Instance.GenerateSpecificReport(data.preferredCrimeLevel);
-        
+        CrimeManagementSystem.Instance.GenerateSpecificReport(
+            System.Guid.NewGuid().ToString(),  // id
+            data.preferredCrimeLevel,          // crimeLevel
+            0f,                                // assignedOfficers
+            false                              // isResolved
+        );
+    
         // Show dialogue UI (implement separately)
         ShowDialogue(dialogue);
-        
+    
         // Destroy NPC after delay
         StartCoroutine(DestroyAfterDelay());
     }

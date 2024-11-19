@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,9 @@ public class CrimeManagementSystem : MonoBehaviour
     private float timer;
     private int totalPoints;
     
+    private float reportInterval = 10f; // Default value, adjust as needed
+
+   
     // Events for UI and other systems to subscribe to
     public event Action<CrimeReport> OnNewReportGenerated;
     public event Action<Officer, CrimeReport> OnOfficerAssigned;
@@ -55,6 +59,27 @@ public class CrimeManagementSystem : MonoBehaviour
         // Update all active reports
         UpdateReports();
     }
+    
+    public void SetReportInterval(float interval)
+    {
+        reportInterval = Mathf.Max(0.1f, interval); // Prevents negative or too small intervals
+    }
+    
+    public CrimeReport GenerateSpecificReport(
+        string id,
+        CrimeLevel crimeLevel,
+        float assignedOfficers = 0,
+        bool isResolved = false)
+    {
+        CrimeReport report = new CrimeReport(crimeLevel)
+        {
+            id = id, // Use the provided ID or generate a new one
+            isResolved = isResolved
+        };
+
+        return report;
+    }
+
 
     private void InitializeOfficers()
     {
@@ -138,6 +163,33 @@ public class CrimeManagementSystem : MonoBehaviour
         
         // Notify UI or other systems
         OnPrecinctUpgraded?.Invoke(officers.Count);
+    }
+    
+    public void LoadGameState(SaveLoadManager.GameSaveData saveData)
+    {
+        // Reset or clear existing data
+        activeReports.Clear();
+        officers.Clear();
+
+        // Restore total points
+        totalPoints = saveData.totalPoints;
+
+        // Restore officers
+        for (int i = 0; i < saveData.officerCount; i++)
+        {
+            officers.Add(new Officer());
+        }
+
+        // Restore active reports
+        foreach (var serializableReport in saveData.activeReports)
+        {
+            CrimeReport report = new CrimeReport((CrimeLevel)serializableReport.crimeLevel)
+            {
+                id = serializableReport.id,
+                progressBar = serializableReport.progressBar
+            };
+            activeReports.Add(report);
+        }
     }
 
     
