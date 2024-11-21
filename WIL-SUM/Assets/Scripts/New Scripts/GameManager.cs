@@ -4,39 +4,42 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
-
-// Manages the overall game state and progression
 public class GameManager : MonoBehaviour {
     [Header("Game State Management")]
-    public int currentLevel = 1;       // Current game level
-    public int totalOfficers = 5;      // Total officers available
-    public int availableOfficers = 5;  // Currently available officers
-    public int currentPoints = 0;      // Current points accumulated
-    public int pointThreshold = 100;   // Points needed to progress to next level
+    public int currentLevel = 1;       
+    public int totalOfficers = 5;      
+    public int availableOfficers = 5;  
+    public int currentPoints = 0;      
+    public int pointThreshold = 100;   
+    public int playerLives = 3;        // Number of attempts player has
+
+    [Header("Level Progression")]
+    public int crimesToSolve = 5;      // Crimes needed to advance to next level
+    public float totalGameTime = 120f; // Total time to solve all required crimes
+    private int crimesSolved = 0;      // Track number of successfully solved crimes
 
     [Header("UI References")]
-    public TMP_Text officerCountText;      // UI text showing available officers
-    public TMP_Text pointsText;            // UI text showing current points
-    public TMP_Text levelText;             // UI text showing current level
-    public TMP_Text gameOverText;          // UI text for game over conditions
+    public TMP_Text officerCountText;      
+    public TMP_Text pointsText;            
+    public TMP_Text levelText;             
+    public TMP_Text gameOverText;          
+    public TMP_Text livesText;             // UI text to display remaining lives
 
     [Header("Game Configuration")]
-    public float crimeGenerationInterval = 30f;  // Time between crime report generations
-    public float maxGameTime = 300f;             // Maximum game time in seconds
+    public float crimeGenerationInterval = 30f;  
+    public float maxGameTime = 300f;             
 
     [Header("Difficulty Scaling")]
-    public float difficultyMultiplier = 1f;      // Increases game difficulty over time
+    public float difficultyMultiplier = 1f;      
 
-    // Internal tracking for game progression
     private float currentGameTime = 0f;
     private List<CrimeReport> activeCrimes = new List<CrimeReport>();
 
-    // Singleton pattern to ensure only one GameManager exists
+    // Singleton instance to ensure only one GameManager exists
     public static GameManager Instance { get; private set; }
 
     void Awake() {
-        // Singleton setup
+        // Implement singleton pattern
         if (Instance == null) {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -46,43 +49,39 @@ public class GameManager : MonoBehaviour {
     }
 
     void Start() {
-        // Initialize the game state
+        // Reset game to initial state
         InitializeGame();
     }
 
     void Update() {
-        // Track game time and update difficulty
+        // Track game progression and time
         UpdateGameProgression();
     }
 
-    // Initialize game settings and starting conditions
     void InitializeGame() {
-        // Reset all game variables
+        // Reset all game variables to starting values
         currentLevel = 1;
         totalOfficers = 5;
         availableOfficers = 5;
         currentPoints = 0;
-        pointThreshold = 100;
+        playerLives = 3;
+        crimesSolved = 0;
         currentGameTime = 0f;
-
-        // Update UI to reflect initial state
+        pointThreshold = 100;
+        
         UpdateUI();
     }
 
-    // Manage game progression and time-based difficulty
     void UpdateGameProgression() {
-        // Track elapsed game time
+        // Increment game time
         currentGameTime += Time.deltaTime;
 
-        // Increase difficulty over time
-        difficultyMultiplier = 1f + (currentGameTime / maxGameTime);
-
-        // Check for game over conditions
-        if (currentGameTime >= maxGameTime) {
+        // End game if time limit is reached
+        if (currentGameTime >= totalGameTime) {
             EndGame(false);
         }
     }
-
+    
     // Generate a random crime report
     public CrimeReport GenerateCrimeReport() {
         // Determine crime level based on current difficulty
@@ -163,7 +162,7 @@ public class GameManager : MonoBehaviour {
             availableOfficers -= assignedOfficers;
             
             // Start crime resolution coroutine
-            StartCoroutine(ResolveCrime(crime, assignedOfficers));
+            SolveCrime(crime, assignedOfficers);
             
             // Update UI
             UpdateUI();
@@ -174,7 +173,7 @@ public class GameManager : MonoBehaviour {
         return false;
     }
 
-    // Resolve crime based on assigned officers
+    /* Resolve crime based on assigned officers
     IEnumerator ResolveCrime(CrimeReport crime, int assignedOfficers) {
         // Calculate efficiency based on assigned vs required officers
         float efficiencyMultiplier = Mathf.Clamp(
@@ -194,57 +193,97 @@ public class GameManager : MonoBehaviour {
         availableOfficers += assignedOfficers;
         
         // Check for level progression
-        CheckLevelProgression();
+        CheckGameProgression();
+    }*/
+
+
+    // Determine crime solving success based on assigned officers
+    public void SolveCrime(CrimeReport crime, int assignedOfficers) {
+        // Calculate efficiency of crime resolution
+        float efficiencyMultiplier = CalculateSolveEfficiency(crime, assignedOfficers);
+        // Wait for crime resolution time, modified by efficiency
+       // yield return new WaitForSeconds(crime.timeToSolve / efficiencyMultiplier);
+        if (efficiencyMultiplier >= 0.5f) {
+            // Successfully solve crime
+            int pointsEarned = Mathf.RoundToInt(crime.pointValue * efficiencyMultiplier);
+            currentPoints += pointsEarned;
+            crimesSolved++;
+        } else {
+            // Failed to solve crime, lose a life
+            playerLives--;
+        }
+
+        // Check game progression status
+        CheckGameProgression();
+        UpdateUI();
     }
 
-    // Check if player has reached level progression threshold
-    void CheckLevelProgression() {
-        if (currentPoints >= pointThreshold) {
+    // Calculate crime solving efficiency based on officer assignment
+    float CalculateSolveEfficiency(CrimeReport crime, int assignedOfficers) {
+        // Determine efficiency by comparing assigned vs required officers
+        float requiredRatio = (float)assignedOfficers / crime.officersRequired;
+        
+        // Efficiency tiers based on officer coverage
+        if (requiredRatio >= 1f) return 1f;       // Fully staffed, maximum efficiency
+        if (requiredRatio >= 0.75f) return 0.75f; // Mostly staffed, good efficiency
+        if (requiredRatio >= 0.5f) return 0.5f;   // Minimum staffing, partial success
+        return 0f;  // Not enough officers, crime not solved
+    }
+
+    void CheckGameProgression() {
+        // Advance to next level if required crimes are solved
+        if (crimesSolved >= crimesToSolve) {
             ProgressToNextLevel();
         }
+
+        // Check for game over conditions
+        if (playerLives <= 0 || currentGameTime >= totalGameTime) {
+            EndGame(false);
+        }
     }
 
-    // Progress to next level, increasing difficulty
     void ProgressToNextLevel() {
+        // Increment level
         currentLevel++;
         
-        // Increase point threshold
-        pointThreshold += 50 * currentLevel;
-        
-        // Increase total and available officers
-        totalOfficers += 2;
-        availableOfficers = totalOfficers;
-        
-        // Reduce crime generation interval (make game more challenging)
-        crimeGenerationInterval = Mathf.Max(15f, crimeGenerationInterval - 2f);
-    }
-
-    // End the game
-    void EndGame(bool playerWon) {
-        // Stop all game activities
-        Time.timeScale = 0f;
-        
-        // Display game over text
-        if (playerWon) {
-            gameOverText.text = "Congratulations! You Won!";
-        } else {
-            gameOverText.text = "Game Over - Time Ran Out";
+        // Increase game difficulty for level 2
+        if (currentLevel == 2) {
+            totalOfficers += 3;        // Add more available officers
+            availableOfficers = totalOfficers;
+            pointThreshold += 100;     // Increase point requirement
+            crimesToSolve += 2;        // Require more crime solves
+            totalGameTime += 60f;      // Extend time limit
         }
         
-        // Show game over UI
+        // Reset progression tracking
+        crimesSolved = 0;
+        currentGameTime = 0f;
+    }
+
+    void EndGame(bool playerWon) {
+        // Stop game time
+        Time.timeScale = 0f;
+        
+        // Display appropriate game over message
+        gameOverText.text = playerWon 
+            ? "Congratulations! You Won!" 
+            : "Game Over - Time Ran Out or Ran Out of Lives";
+        
         gameOverText.gameObject.SetActive(true);
     }
 
-    // Update all UI elements
     void UpdateUI() {
-        // Null checks to prevent errors
+        // Update all UI text elements with current game state
         if (officerCountText != null)
             officerCountText.text = $"Available Officers: {availableOfficers}";
         
         if (pointsText != null)
-            pointsText.text = $"Points: {currentPoints}/{pointThreshold}";
+            pointsText.text = $"Points: {currentPoints}";
         
         if (levelText != null)
             levelText.text = $"Level: {currentLevel}";
+        
+        if (livesText != null)
+            livesText.text = $"Lives: {playerLives}";
     }
 }

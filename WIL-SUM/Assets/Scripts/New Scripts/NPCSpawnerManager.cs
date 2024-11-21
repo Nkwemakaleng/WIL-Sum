@@ -6,70 +6,53 @@ using TMPro;
 
 public class NPCSpawnerManager : MonoBehaviour {
     [Header("Spawn Settings")]
-    public GameObject[] npcPrefabs;
-    public Transform npcSpawnPoint;
-    public Transform npcDeliveryPoint;
+    public GameObject[] npcPrefabs;        // Different NPC models to spawn
+    public Transform npcSpawnPoint;        // Location where NPCs initially appear
+    public Transform npcDeliveryPoint;     // Location where NPCs go after report
 
     [Header("UI References")]
-    public GameObject officerAssignmentPanel;
-    public TMP_Text crimeDescriptionText;
-    public TMP_Text crimeLevelText;
-    public TMP_Text officersRequiredText;
+    public GameObject officerAssignmentPanel;  // Panel for officer selection
+    public TMP_Text crimeDescriptionText;      // Displays current crime details
+    public TMP_Text crimeLevelText;            // Shows crime severity
+    public TMP_Text officersRequiredText;      // Shows recommended officer count
 
     [Header("Officer Selection")]
-    public Slider officerAssignmentSlider;
-    public TMP_Text selectedOfficersText;
-    public Button assignButton;
+    public Slider officerAssignmentSlider;  // UI slider to select officer count
+    public TMP_Text selectedOfficersText;   // Displays currently selected officers
+    public Button assignButton;             // Button to confirm officer assignment
 
     [Header("Game Manager Reference")]
-    public GameManager gameManager;
+    public GameManager gameManager;         // Reference to main game manager
 
-    private CrimeReport currentCrime;
-    private GameObject currentNPC;
+    private CrimeReport currentCrime;       // Crime currently being processed
+    private GameObject currentNPC;          // Currently spawned NPC
 
     void Start() {
-        // Ensure assignment panel starts hidden
+        // Initialize UI and start first NPC spawn
         officerAssignmentPanel.SetActive(false);
-        
-        // Set up slider listener
         officerAssignmentSlider.onValueChanged.AddListener(UpdateSelectedOfficers);
         assignButton.onClick.AddListener(AssignOfficers);
-
-        // Spawn initial NPC
         SpawnInitialNPC();
     }
 
     void SpawnInitialNPC() {
-        // Create initial crime report
-        CrimeReport initialCrime = GenerateInitialCrimeReport();
+        // Generate and spawn initial crime report
+        CrimeReport initialCrime = gameManager.GenerateCrimeReport();
         SpawnNPCWithCrimeReport(initialCrime);
     }
 
-    CrimeReport GenerateInitialCrimeReport() {
-        return new CrimeReport {
-            level = CrimeLevel.Low,
-            crimeDescription = "Noise Complaint in Residential Area",
-            officersRequired = 2,
-            timeToSolve = 60f,
-            pointValue = 25
-        };
-    }
-
     void SpawnNPCWithCrimeReport(CrimeReport crime) {
-        // Destroy any existing NPC
+        // Remove existing NPC if present
         if (currentNPC != null) {
             Destroy(currentNPC);
         }
 
-        // Spawn new NPC
+        // Spawn new NPC at spawn point
         currentNPC = Instantiate(npcPrefabs[Random.Range(0, npcPrefabs.Length)], 
             npcSpawnPoint.position, 
             Quaternion.identity);
 
-        // Store current crime
         currentCrime = crime;
-
-        // Prepare UI for crime report
         PrepareAssignmentUI(crime);
     }
 
@@ -78,52 +61,66 @@ public class NPCSpawnerManager : MonoBehaviour {
         officerAssignmentSlider.minValue = 1;
         officerAssignmentSlider.maxValue = Mathf.Min(
             gameManager.availableOfficers, 
-            crime.officersRequired + 2  // Allow some flexibility
+            crime.officersRequired + 2  // Allow some flexibility in officer selection
         );
         officerAssignmentSlider.value = crime.officersRequired;
 
-        // Update UI texts
+        // Update UI texts with crime details
         crimeDescriptionText.text = $"Crime: {crime.crimeDescription}";
         crimeLevelText.text = $"Severity: {crime.level}";
         officersRequiredText.text = $"Recommended Officers: {crime.officersRequired}";
 
-        // Show assignment panel
         officerAssignmentPanel.SetActive(true);
     }
 
     void UpdateSelectedOfficers(float value) {
-        // Round slider value to integer
+        // Update UI to show currently selected officer count
         int selectedOfficers = Mathf.RoundToInt(value);
         selectedOfficersText.text = $"Selected Officers: {selectedOfficers}";
     }
 
     void AssignOfficers() {
+        // Get number of officers selected
         int selectedOfficers = Mathf.RoundToInt(officerAssignmentSlider.value);
 
-        // Attempt to assign officers through game manager
-        if (gameManager.AssignOfficersToCrime(currentCrime, selectedOfficers)) {
-            // Hide assignment panel
+        // Check if enough officers are available
+        if (gameManager.availableOfficers >= selectedOfficers) {
+            // Reduce available officers
+            gameManager.availableOfficers -= selectedOfficers;
+            
+            // Start crime resolution process
+            StartCoroutine(ResolveCrimeAfterDelay(currentCrime, selectedOfficers));
+            
+            // Hide assignment panel and animate NPC leaving
             officerAssignmentPanel.SetActive(false);
-
-            // Animate NPC leaving
             AnimateNPCLeave();
 
-            // Optionally spawn next NPC after a delay
+            // Spawn next NPC
             Invoke(nameof(SpawnInitialNPC), 3f);
         }
         else {
-            // Show error - not enough officers
             Debug.LogWarning("Not enough officers available!");
         }
     }
 
+    // Coroutine to resolve crime after a delay based on officer efficiency
+    IEnumerator ResolveCrimeAfterDelay(CrimeReport crime, int officersAssigned) {
+        // Calculate resolution time based on officers assigned
+        float resolveTime = crime.timeToSolve / (officersAssigned / (float)crime.officersRequired);
+        yield return new WaitForSeconds(resolveTime);
+
+        // Attempt to solve crime through game manager
+        gameManager.SolveCrime(crime, officersAssigned);
+    }
+
     void AnimateNPCLeave() {
+        // Initiate NPC leaving animation if NPC exists
         if (currentNPC != null) {
-            // Simple movement to delivery point
             StartCoroutine(MoveNPCToDeliveryPoint());
         }
     }
 
+    // Coroutine to smoothly move NPC to delivery point
     IEnumerator MoveNPCToDeliveryPoint() {
         float moveDuration = 1f;
         float elapsedTime = 0;
@@ -131,6 +128,7 @@ public class NPCSpawnerManager : MonoBehaviour {
         Vector3 startPosition = currentNPC.transform.position;
         Vector3 endPosition = npcDeliveryPoint.position;
 
+        // Interpolate NPC movement
         while (elapsedTime < moveDuration) {
             currentNPC.transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / moveDuration);
             elapsedTime += Time.deltaTime;
