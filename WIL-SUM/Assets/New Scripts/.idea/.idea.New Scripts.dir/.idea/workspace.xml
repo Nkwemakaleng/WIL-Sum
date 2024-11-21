@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f887ac1f-2f2d-445b-b27f-d743a10d23bc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Scripts/CrimeManagementSystem.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/CrimeManagementSystem.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/CrimeReport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/CrimeReport.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/DifficultyManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/DifficultyManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/GameUIManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/GameUIManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/NPCManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/NPCManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/NPCReportSystem.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/NPCReportSystem.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/ReportUIManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/ReportUIManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/SaveLoadManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/SaveLoadManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/TutorialManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/TutorialManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/TutorialSequence.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/TutorialSequence.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/TutorialSequence.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/TutorialSequence.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/ArtifactDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/14/14770bcf42f9786b3f8e7c50fd66b0b6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/22/22b276702c8070fd4e4358a420a2828f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/27/276f0901e838154151949b6fae28d3db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/49/49fa864427303bf831449312bd19b221" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/68/6850ffd16f9af072a685a53733b02bf6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/78/78f4627ac6db8460885aec55b63febf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/8e/8e885cbce0a323bfa4f9c9da40285b83" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/9a/9a46096ebdf7c5170ca37da0f7b17e2f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/9c/9cc871005040c356912ef4b14105e881" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/9d/9d9eabfebff288bc506a73f7a16466c8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/a0/a0e3ea62331a5e743033b08b1febccd7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/d8/d8127a826619a98fbfb5ddbcbdb38a87" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Artifacts/e3/e3ea62e06f2fb8e5a1f7e36e25986733" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/1900b0aE-inputdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/1900b0aE-inputdata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/1900b0aE.dag" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/1900b0aE.dag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/1900b0aE.dag.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/1900b0aE.dag.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/1900b0aE.dag.payloads" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/1900b0aE.dag.payloads" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/1900b0aE.dag_derived" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/1900b0aE.dag_derived" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/TundraBuildState.state" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/TundraBuildState.state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/TundraBuildState.state.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/TundraBuildState.state.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.ref.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.ref.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/backend1.traceevents" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/backend1.traceevents" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/backend2.traceevents" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/backend2.traceevents" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/buildprogram0.traceevents" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/buildprogram0.traceevents" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/fullprofile.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/fullprofile.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/tundra.digestcache" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/tundra.digestcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Bee/tundra.log.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Bee/tundra.log.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/PackageManager/ProjectCache" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/PackageManager/ProjectCache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/PackageManager/ProjectCache.md5" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/PackageManager/ProjectCache.md5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/SceneVisibilityState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/SceneVisibilityState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/Search/transactions.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/Search/transactions.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/ShaderCache/EditorEncounteredVariants" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/ShaderCache/EditorEncounteredVariants" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/SourceAssetDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/StateCache/MainStageHierarchy/4d/4d2a36d9faf65734f0bbefb3ee623532.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/StateCache/MainStageHierarchy/4d/4d2a36d9faf65734f0bbefb3ee623532.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Library/ilpp.pid" beforeDir="false" afterPath="$PROJECT_DIR$/../../Library/ilpp.pid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Logs/AssetImportWorker0-prev.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../Logs/AssetImportWorker0.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Logs/AssetImportWorker1-prev.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Logs/AssetImportWorker1.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../Logs/AssetImportWorker1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Logs/shadercompiler-AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../Logs/shadercompiler-AssetImportWorker0.log" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../Scripts/CrimeReport.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Scripts/New Scripts/Desk View Controller.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Scripts/New Scripts/GameManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Scripts/New Scripts/NPCSpawnerManager.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2p9TPprHkBtGqGDSu2V0DXoYCA5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Melu__2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\lordgula\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\lordgula\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\lordgula\\AppData\\Local\\Symbols\\src"
+    ]
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f887ac1f-2f2d-445b-b27f-d743a10d23bc" name="Changes" comment="" />
+      <created>1732177271060</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732177271060</updated>
+      <workItem from="1732177276206" duration="5445000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
