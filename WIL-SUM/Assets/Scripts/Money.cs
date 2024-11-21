@@ -23,8 +23,5 @@ public class Money : MonoBehaviour
     {
         StartCoroutine(MoneyPassive());
     }
-    private void Update()
-    {
-        
-    }
+
 }
