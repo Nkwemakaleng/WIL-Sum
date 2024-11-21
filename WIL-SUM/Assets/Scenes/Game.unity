@@ -325,6 +325,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb1c82fdb5a8783479741448ea85d523, type: 3}
+--- !u!1 &1228955463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1228955465}
+  - component: {fileID: 1228955464}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1228955464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228955463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4081ca493263c44b756c2ae43f6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+--- !u!4 &1228955465
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228955463}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 247.98544, y: 63.901154, z: 499.07776}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1392354519 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1482935793215621896, guid: 85fe0eb29d2626d42a4f967e91b9d0d4, type: 3}
@@ -457,7 +502,7 @@ GameObject:
   - component: {fileID: 1767167252}
   - component: {fileID: 1767167251}
   m_Layer: 5
-  m_Name: Money (1)
+  m_Name: Units
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,7 +636,7 @@ GameObject:
   - component: {fileID: 1901375044}
   - component: {fileID: 1901375043}
   m_Layer: 5
-  m_Name: Money (2)
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2615,8 +2660,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc94fe491d7049548969af496f4f4e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  officerCountText: {fileID: 0}
+  scoreText: {fileID: 0}
+  crimeListText: {fileID: 0}
+  resourceManager: {fileID: 0}
+  crimeManager: {fileID: 0}
   money: {fileID: 8678776653573083467}
-  text: {fileID: 2013949261}
+  moneyText: {fileID: 0}
 --- !u!33 &7646458131517042458
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2907,3 +2957,4 @@ SceneRoots:
   - {fileID: 1017465457}
   - {fileID: 1571399246}
   - {fileID: 1204979969}
+  - {fileID: 1228955465}
