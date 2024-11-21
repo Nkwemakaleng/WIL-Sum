@@ -22,6 +22,7 @@ public class CrimeManager : MonoBehaviour
         public string crimeDesc1;
         public string crimeDesc2;
         public string crimeDesc3;
+        public int scoreMultiplier;
     }
 
     private int nextCrimeID = 1; // Unique identifier for crimes
@@ -35,14 +36,48 @@ public class CrimeManager : MonoBehaviour
 
     void GenerateCrime()
     {
+        CrimeSeverity severity = (CrimeSeverity)Random.Range(0, 3);
+
+        // Determine requirements based on severity
+        int officersRequired;
+        float resolutionTime;
+        int officerLeeway;
+
+        switch (severity)
+        {
+            case CrimeSeverity.Low:
+                officersRequired = Random.Range(1, 2);
+                resolutionTime = Random.Range(5f, 15f);
+                officerLeeway = 1; // Allow minor overcommitment
+                break;
+
+            case CrimeSeverity.Medium:
+                officersRequired = Random.Range(3, 5);
+                resolutionTime = Random.Range(20f, 40f);
+                officerLeeway = 2; // Moderate flexibility
+                break;
+
+            case CrimeSeverity.High:
+                officersRequired = Random.Range(5, 8);
+                resolutionTime = Random.Range(50f, 80f);
+                officerLeeway = 3; // Higher flexibility for resource management
+                break;
+
+            default:
+                officersRequired = 1;
+                resolutionTime = 10f;
+                officerLeeway = 0;
+                break;
+        }
+
         Crime newCrime = new Crime
         {
             id = nextCrimeID,
             crimeType = (CrimeType)Random.Range(0, 3),
-            severity = (CrimeSeverity)Random.Range(0, 3),
-            officersRequired = Random.Range(1, 5),
-            officerLeeway = Random.Range(0, 2),
-            resolutionTime = Random.Range(10f, 30f),
+            severity = severity,
+            officersRequired = officersRequired,
+            officerLeeway = officerLeeway,
+            resolutionTime = resolutionTime,
             isResolved = false,
             crimeLocationX = Random.Range(0, 100),
             crimeLocationY = Random.Range(0, 100),
@@ -54,7 +89,7 @@ public class CrimeManager : MonoBehaviour
         };
 
         activeCrimes.Add(nextCrimeID, newCrime);
-        Debug.Log($"New crime reported with ID {nextCrimeID}: {newCrime.crimeType} at {newCrime.streetAddress}.");
+        Debug.Log($"New {severity} crime reported with ID {nextCrimeID}: {newCrime.crimeType} at {newCrime.streetAddress}.");
         nextCrimeID++;
     }
 
@@ -102,5 +137,6 @@ public class CrimeManager : MonoBehaviour
         }
     }
 }
+
 
 
