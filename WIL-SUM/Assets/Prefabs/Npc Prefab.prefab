@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1345654561299906650}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.0483737, y: -1.1123252, z: -4.9508123}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 571062891294471999}
   - component: {fileID: 7487606415317601151}
   - component: {fileID: 8892853616352831778}
+  - component: {fileID: -3483963795812649349}
   m_Layer: 0
   m_Name: Npc Prefab
   m_TagString: Untagged
@@ -136,7 +137,7 @@ Transform:
   m_GameObject: {fileID: 8645035078716482549}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.0483737, y: 2.1123252, z: 4.9508123}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -155,6 +156,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d13e3c0a90c49499120ef8eccc9da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 2
+  arrivalDistance: 0.1
+  spawnPoint: {fileID: 0}
+  deliveryPoint: {fileID: 0}
+  playerDeskPoint: {fileID: 0}
+  walkParameterName: IsWalking
+  idleParameterName: IsIdle
 --- !u!114 &571062891294471999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,3 +377,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &-3483963795812649349
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8645035078716482549}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
