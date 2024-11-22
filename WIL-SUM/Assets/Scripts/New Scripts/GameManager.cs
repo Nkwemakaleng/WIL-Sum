@@ -25,8 +25,12 @@ public class GameManager : MonoBehaviour {
     public TMP_Text levelText;             
     public TMP_Text gameOverText;          
     public TMP_Text livesText;             // UI text to display remaining lives
-    public GameObject gameOverPanel;  // Add this UI panel
 
+    [Header("UI Panels")]
+    public GameObject pausePanel;
+    public GameObject optionsPanel;
+    public GameObject gameOverPanel;
+    public GameObject inGamePanel; // Main gameplay UI panel
 
     [Header("Game Configuration")]
     public float crimeGenerationInterval = 30f;  
@@ -40,7 +44,8 @@ public class GameManager : MonoBehaviour {
 
     // Singleton instance to ensure only one GameManager exists
     public static GameManager Instance { get; private set; }
-
+    private UIStuff uistuff;
+    private MenuManager menuManager;
     void Awake() {
         // Implement singleton pattern
         if (Instance == null) {
@@ -311,4 +316,28 @@ public class GameManager : MonoBehaviour {
         if (livesText != null)
             livesText.text = $"Lives: {playerLives}";
     }
+    public void ResetUI()
+    {
+        if (officerCountText != null)
+            officerCountText.text = $"Available Officers: {totalOfficers}";
+
+        if (pointsText != null)
+            pointsText.text = $"Points: {currentPoints}";
+
+        if (levelText != null)
+            levelText.text = $"Level: {currentLevel}";
+
+        if (livesText != null)
+            livesText.text = $"Lives: {playerLives}";
+
+        if (gameOverText != null)
+        {
+            gameOverText.text = "";
+            gameOverText.gameObject.SetActive(false);
+        }
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+    }
+
 }

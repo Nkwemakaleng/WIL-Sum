@@ -364,6 +364,7 @@
 "Assets/Scripts/CrimeManager.cs"
 "Assets/Scripts/CrimeReport.cs"
 "Assets/Scripts/Enemy.cs"
+"Assets/Scripts/MenuManager.cs"
 "Assets/Scripts/Money.cs"
 "Assets/Scripts/New Scripts/GameManager.cs"
 "Assets/Scripts/New Scripts/NPCAnimatorController.cs"
