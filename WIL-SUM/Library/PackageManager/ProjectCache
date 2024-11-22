@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638677908250997377
-    m_Hash: 3219397261
+      ticks: 638678507895743118
+    m_Hash: 545731776
   m_LockFileStatus:
     m_FilePath: C:/Users/lordgula/Documents/GitHub/WIL-Sum/WIL-SUM/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638677908251046798
-    m_Hash: 2107537667
+      ticks: 638678507895808440
+    m_Hash: 561156941
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:

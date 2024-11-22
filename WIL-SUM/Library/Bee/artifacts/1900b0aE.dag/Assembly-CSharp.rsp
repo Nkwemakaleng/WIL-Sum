@@ -364,7 +364,9 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/ScifiOfficeLite/Scripts/DemoDoor.cs"
 "Assets/ScifiOfficeLite/Scripts/DemoFirstPersonController.cs"
+"Assets/Scripts/CrimeManager.cs"
 "Assets/Scripts/CrimeReport.cs"
+"Assets/Scripts/Enemy.cs"
 "Assets/Scripts/Money.cs"
 "Assets/Scripts/New Scripts/GameManager.cs"
 "Assets/Scripts/New Scripts/NPCAnimatorController.cs"
@@ -372,6 +374,9 @@
 "Assets/Scripts/New Scripts/NPCSoundManager.cs"
 "Assets/Scripts/New Scripts/NPCSpawnerManager.cs"
 "Assets/Scripts/Officer.cs"
+"Assets/Scripts/ResourceManager.cs"
+"Assets/Scripts/UIStuff.cs"
+"Assets/Scripts/Units.cs"
 -langversion:9.0
 
 /deterministic

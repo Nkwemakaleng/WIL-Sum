@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public int currentPoints = 0;      
     public int pointThreshold = 100;   
     public int playerLives = 3;        // Number of attempts player has
+    public float crimeTimeoutDuration = 15f;
 
     [Header("Level Progression")]
     public int crimesToSolve = 5;      // Crimes needed to advance to next level
@@ -24,10 +25,12 @@ public class GameManager : MonoBehaviour {
     public TMP_Text levelText;             
     public TMP_Text gameOverText;          
     public TMP_Text livesText;             // UI text to display remaining lives
+    public GameObject gameOverPanel;  // Add this UI panel
+
 
     [Header("Game Configuration")]
     public float crimeGenerationInterval = 30f;  
-    public float maxGameTime = 300f;             
+    public float maxGameTime = 120f;             
 
     [Header("Difficulty Scaling")]
     public float difficultyMultiplier = 1f;      
@@ -70,6 +73,10 @@ public class GameManager : MonoBehaviour {
         pointThreshold = 100;
         
         UpdateUI();
+        
+        if (gameOverPanel != null) {
+            gameOverPanel.SetActive(false);
+        }
     }
 
     void UpdateGameProgression() {
@@ -145,7 +152,7 @@ public class GameManager : MonoBehaviour {
     // Calculate time to solve based on crime level
     float CalculateTimeToSolve(CrimeLevel level) {
         // Higher level crimes take longer to resolve
-        return 60f * (float)level * difficultyMultiplier;
+        return 5f * (float)level * difficultyMultiplier;
     }
 
     // Calculate point value for solving a crime
@@ -173,7 +180,7 @@ public class GameManager : MonoBehaviour {
         return false;
     }
 
-    /* Resolve crime based on assigned officers
+     //Resolve crime based on assigned officers
     IEnumerator ResolveCrime(CrimeReport crime, int assignedOfficers) {
         // Calculate efficiency based on assigned vs required officers
         float efficiencyMultiplier = Mathf.Clamp(
@@ -194,7 +201,7 @@ public class GameManager : MonoBehaviour {
         
         // Check for level progression
         CheckGameProgression();
-    }*/
+    }
 
 
     // Determine crime solving success based on assigned officers
@@ -215,6 +222,7 @@ public class GameManager : MonoBehaviour {
 
         // Check game progression status
         CheckGameProgression();
+        availableOfficers += assignedOfficers;
         UpdateUI();
     }
 
@@ -271,8 +279,24 @@ public class GameManager : MonoBehaviour {
         
         gameOverText.gameObject.SetActive(true);
     }
+    
+    // Method to restart game
+    public void RestartGame() {
+        Time.timeScale = 1f;
+        InitializeGame();
+    }
+    
+    // Method to handle failed crimes
+    public void OnCrimeFailed() {
+        playerLives--;
+        UpdateUI();
+        
+        if (playerLives <= 0) {
+            EndGame(false);
+        }
+    }
 
-    void UpdateUI() {
+    public void UpdateUI() {
         // Update all UI text elements with current game state
         if (officerCountText != null)
             officerCountText.text = $"Available Officers: {availableOfficers}";

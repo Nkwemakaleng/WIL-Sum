@@ -319,8 +319,8 @@ RectTransform:
   - {fileID: 577186341}
   - {fileID: 2093240809}
   - {fileID: 1817069453}
-  - {fileID: 369563280}
   - {fileID: 1090449936}
+  - {fileID: 593991336}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -443,16 +443,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369563279}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 116774843}
+  m_Father: {fileID: 593991336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -815}
+  m_AnchoredPosition: {x: 0, y: 11}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &369563281
@@ -820,6 +820,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577186340}
   m_CullTransparentMesh: 1
+--- !u!1 &593991335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 593991336}
+  - component: {fileID: 593991338}
+  - component: {fileID: 593991337}
+  m_Layer: 5
+  m_Name: Game Over Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &593991336
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593991335}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 369563280}
+  m_Father: {fileID: 116774843}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -163.57513}
+  m_SizeDelta: {x: 417.2238, y: 200.4459}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &593991337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593991335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &593991338
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593991335}
+  m_CullTransparentMesh: 1
 --- !u!1 &615853448
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,11 +1017,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 1
-  totalOfficers: 5
-  availableOfficers: 5
+  totalOfficers: 6
+  availableOfficers: 6
   currentPoints: 0
   pointThreshold: 100
   playerLives: 3
+  crimeTimeoutDuration: 15
   crimesToSolve: 5
   totalGameTime: 120
   officerCountText: {fileID: 468142354}
@@ -953,6 +1030,7 @@ MonoBehaviour:
   levelText: {fileID: 2093240810}
   gameOverText: {fileID: 369563281}
   livesText: {fileID: 1817069454}
+  gameOverPanel: {fileID: 593991335}
   crimeGenerationInterval: 30
   maxGameTime: 300
   difficultyMultiplier: 1
@@ -976,6 +1054,7 @@ MonoBehaviour:
   crimeDescriptionText: {fileID: 2023247288}
   crimeLevelText: {fileID: 1377699939}
   officersRequiredText: {fileID: 937612900}
+  timeRemainingText: {fileID: 0}
   officerAssignmentSlider: {fileID: 276257657}
   selectedOfficersText: {fileID: 2057850566}
   assignButton: {fileID: 1662599732}
@@ -1263,7 +1342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427223591569217663, guid: bdab25dc94577ee4e9321a6a407328aa, type: 3}
       propertyPath: walkSpeed
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 427223591569217663, guid: bdab25dc94577ee4e9321a6a407328aa, type: 3}
       propertyPath: spawnPoint
@@ -1276,7 +1355,7 @@ PrefabInstance:
     - target: {fileID: 427223591569217663, guid: bdab25dc94577ee4e9321a6a407328aa, type: 3}
       propertyPath: playerDeskPoint
       value: 
-      objectReference: {fileID: 1909330797}
+      objectReference: {fileID: 1596197096}
     - target: {fileID: 3882711489345516621, guid: bdab25dc94577ee4e9321a6a407328aa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.91
@@ -1598,7 +1677,7 @@ Transform:
   m_GameObject: {fileID: 1142625212}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
-  m_LocalPosition: {x: -0.54, y: 0.23, z: 3.04}
+  m_LocalPosition: {x: 8.53, y: 0.23, z: -4.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1704,7 +1783,7 @@ Transform:
   m_GameObject: {fileID: 1342329692}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.36, y: 1, z: -4.32}
+  m_LocalPosition: {x: 9.5, y: 1.14, z: -4.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1911,6 +1990,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1596197095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1596197096}
+  - component: {fileID: 1596197097}
+  m_Layer: 0
+  m_Name: Desk Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1596197096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596197095}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
+  m_LocalPosition: {x: -0.54, y: 0.23, z: 3.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
+--- !u!65 &1596197097
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596197095}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1611702574
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,11 +2440,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!4 &1909330797 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2378993079233843733, guid: d5df04581f79bd74882fe0e977eff2f3, type: 3}
-  m_PrefabInstance: {fileID: 3057209265459261017}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2023247286
 GameObject:
   m_ObjectHideFlags: 0
@@ -3097,6 +3224,7 @@ SceneRoots:
   - {fileID: 1214148585748815157}
   - {fileID: 1342329693}
   - {fileID: 1142625214}
+  - {fileID: 1596197096}
   - {fileID: 1566676475}
   - {fileID: 1373455497}
   - {fileID: 56974258}
