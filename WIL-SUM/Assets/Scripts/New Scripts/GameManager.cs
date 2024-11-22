@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour {
     void Update() {
         // Track game progression and time
         UpdateGameProgression();
+        UpdateUI();
     }
 
     void InitializeGame() {
