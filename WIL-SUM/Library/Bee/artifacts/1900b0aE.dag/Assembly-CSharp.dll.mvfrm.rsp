@@ -1,7 +1,3 @@
-Library\Bee\artifacts\mvdfrm\Unity.AI.Navigation.Editor.ConversionSystem.ref.dll_D58562F0DF82BCBA.mvfrm
-Library\Bee\artifacts\mvdfrm\Unity.AI.Navigation.Editor.ref.dll_7989A1C8D57EF9BF.mvfrm
-Library\Bee\artifacts\mvdfrm\Unity.AI.Navigation.Updater.ref.dll_34B8D5B7DED6E76D.mvfrm
-Library\Bee\artifacts\mvdfrm\Unity.AI.Navigation.ref.dll_407F07063643C512.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.EditorCoroutines.Editor.ref.dll_34ED10A34098B2DB.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Performance.Profile-Analyzer.Editor.ref.dll_65A192712782EB2B.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.PlasticSCM.Editor.ref.dll_257AEB342BE77856.mvfrm
@@ -108,7 +104,4 @@ Library\Bee\artifacts\mvdfrm\UnityEngine.VirtualTexturingModule.dll_18DCC686EFC5
 Library\Bee\artifacts\mvdfrm\UnityEngine.VRModule.dll_45DB6332461B4EFD.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEngine.WindModule.dll_CCE979C7B920F1B9.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEngine.XRModule.dll_789A2636CF559C5B.mvfrm
-Library\Bee\artifacts\mvdfrm\Unity.Android.Gradle.dll_D0CD153921FC648D.mvfrm
-Library\Bee\artifacts\mvdfrm\Unity.Android.GradleProject.dll_ACD52811152912F8.mvfrm
-Library\Bee\artifacts\mvdfrm\Unity.Android.Types.dll_A6ACEFB9F0BDDDFF.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.VisualScripting.Antlr3.Runtime.dll_DACAA631817C5F43.mvfrm
