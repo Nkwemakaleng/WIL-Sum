@@ -25,6 +25,12 @@ public class NPCController : MonoBehaviour {
 
     private bool isMoving = false;
     private Vector3 currentDestination;
+    
+    // Event for reaching desk
+    public event System.Action OnReachedDesk;
+    
+    // Track if NPC has reached exit
+    private bool hasReachedExit = false;
 
     void Awake() {
         // Get required components
@@ -102,14 +108,35 @@ public class NPCController : MonoBehaviour {
         OnReachedDestination();
     }
 
+    // Updated OnReachedDestination method
     void OnReachedDestination() {
-        // Potential interaction or event trigger
-        // For example, hand over crime report
         if (currentDestination == playerDeskPoint.position) {
-            // Trigger crime report handover
+            // Notify spawner that NPC has reached desk
+            OnReachedDesk?.Invoke();
             ExecuteCrimeReportHandover();
         }
+        else if (currentDestination == deliveryPoint.position) {
+            hasReachedExit = true;
+        }
     }
+
+    // Method to initiate exit movement
+    public void MoveToExit() {
+        hasReachedExit = false;
+        MoveToTarget(deliveryPoint.position);
+    }
+
+    // Method to check if NPC has reached exit
+    public bool HasReachedExit() {
+        return hasReachedExit;
+    }
+
+    /* Method to handle report acceptance
+    public void OnReportAccepted() {
+        if (animator != null) {
+            animator.SetTrigger("ReportAccepted");
+        }
+    }*/
 
     void ExecuteCrimeReportHandover() {
         // Play delivery animation
@@ -123,7 +150,7 @@ public class NPCController : MonoBehaviour {
         }
     }
 
-    // Method to be called when player accepts/rejects report
+    /* Method to be called when player accepts/rejects report
     public void OnReportInteraction(bool accepted) {
         if (accepted) {
             // Play accepted animation/sound
@@ -138,5 +165,5 @@ public class NPCController : MonoBehaviour {
 
         // Move to delivery point
         MoveToTarget(deliveryPoint.position);
-    }
+    }*/
 }

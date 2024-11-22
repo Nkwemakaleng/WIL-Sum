@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public int currentPoints = 0;      
     public int pointThreshold = 100;   
     public int playerLives = 3;        // Number of attempts player has
+    public float crimeTimeoutDuration = 15f; 
 
     [Header("Level Progression")]
     public int crimesToSolve = 5;      // Crimes needed to advance to next level
@@ -24,10 +25,11 @@ public class GameManager : MonoBehaviour {
     public TMP_Text levelText;             
     public TMP_Text gameOverText;          
     public TMP_Text livesText;             // UI text to display remaining lives
+    public GameObject gameOverPanel;  // Add this UI panel
 
     [Header("Game Configuration")]
     public float crimeGenerationInterval = 30f;  
-    public float maxGameTime = 300f;             
+    public float maxGameTime = 120f;             
 
     [Header("Difficulty Scaling")]
     public float difficultyMultiplier = 1f;      
@@ -70,6 +72,10 @@ public class GameManager : MonoBehaviour {
         pointThreshold = 100;
         
         UpdateUI();
+        
+        if (gameOverPanel != null) {
+            gameOverPanel.SetActive(false);
+        }
     }
 
     void UpdateGameProgression() {
@@ -145,7 +151,7 @@ public class GameManager : MonoBehaviour {
     // Calculate time to solve based on crime level
     float CalculateTimeToSolve(CrimeLevel level) {
         // Higher level crimes take longer to resolve
-        return 60f * (float)level * difficultyMultiplier;
+        return 5f * (float)level * difficultyMultiplier;
     }
 
     // Calculate point value for solving a crime
@@ -154,7 +160,7 @@ public class GameManager : MonoBehaviour {
         return (int)(50 * (float)level * difficultyMultiplier);
     }
 
-    // Attempt to assign officers to a crime
+    // Attempt to assign officers to a crime - Updated to properly handle UI updates
     public bool AssignOfficersToCrime(CrimeReport crime, int assignedOfficers) {
         // Check if enough officers are available
         if (availableOfficers >= assignedOfficers) {
@@ -162,9 +168,9 @@ public class GameManager : MonoBehaviour {
             availableOfficers -= assignedOfficers;
             
             // Start crime resolution coroutine
-            SolveCrime(crime, assignedOfficers);
+            StartCoroutine(ResolveCrime(crime, assignedOfficers));
             
-            // Update UI
+            // Update UI immediately after officer assignment
             UpdateUI();
             return true;
         }
@@ -173,7 +179,7 @@ public class GameManager : MonoBehaviour {
         return false;
     }
 
-    /* Resolve crime based on assigned officers
+    // Updated ResolveCrime coroutine to ensure proper officer return and UI update
     IEnumerator ResolveCrime(CrimeReport crime, int assignedOfficers) {
         // Calculate efficiency based on assigned vs required officers
         float efficiencyMultiplier = Mathf.Clamp(
@@ -189,13 +195,13 @@ public class GameManager : MonoBehaviour {
         int pointsEarned = Mathf.RoundToInt(crime.pointValue * efficiencyMultiplier);
         currentPoints += pointsEarned;
         
-        // Return excess officers to pool
+        // Return officers to available pool and update UI
         availableOfficers += assignedOfficers;
+        UpdateUI();  // Make sure UI updates when officers return
         
         // Check for level progression
         CheckGameProgression();
-    }*/
-
+    }
 
     // Determine crime solving success based on assigned officers
     public void SolveCrime(CrimeReport crime, int assignedOfficers) {
@@ -215,6 +221,7 @@ public class GameManager : MonoBehaviour {
 
         // Check game progression status
         CheckGameProgression();
+        availableOfficers += assignedOfficers;
         UpdateUI();
     }
 
@@ -250,7 +257,7 @@ public class GameManager : MonoBehaviour {
         if (currentLevel == 2) {
             totalOfficers += 3;        // Add more available officers
             availableOfficers = totalOfficers;
-            pointThreshold += 100;     // Increase point requirement
+            pointThreshold += 250;     // Increase point requirement
             crimesToSolve += 2;        // Require more crime solves
             totalGameTime += 60f;      // Extend time limit
         }
@@ -259,26 +266,46 @@ public class GameManager : MonoBehaviour {
         crimesSolved = 0;
         currentGameTime = 0f;
     }
+    
+    // Method to handle failed crimes
+    public void OnCrimeFailed() {
+        playerLives--;
+        UpdateUI();
+        
+        if (playerLives <= 0) {
+            EndGame(false);
+        }
+    }
 
     void EndGame(bool playerWon) {
         // Stop game time
         Time.timeScale = 0f;
         
-        // Display appropriate game over message
-        gameOverText.text = playerWon 
-            ? "Congratulations! You Won!" 
-            : "Game Over - Time Ran Out or Ran Out of Lives";
+        if (gameOverPanel != null) {
+            gameOverPanel.SetActive(true);
+        }
         
-        gameOverText.gameObject.SetActive(true);
+        if (gameOverText != null) {
+            gameOverText.text = playerWon ? 
+                $"Congratulations! You Won!\nFinal Score: {currentPoints}" :
+                $"Game Over!\nFinal Score: {currentPoints}";
+        }
+    }
+    
+    
+    // Method to restart game
+    public void RestartGame() {
+        Time.timeScale = 1f;
+        InitializeGame();
     }
 
-    void UpdateUI() {
+    public void UpdateUI() {
         // Update all UI text elements with current game state
         if (officerCountText != null)
             officerCountText.text = $"Available Officers: {availableOfficers}";
         
         if (pointsText != null)
-            pointsText.text = $"Points: {currentPoints}";
+            pointsText.text = $"Points: {currentPoints}/{pointThreshold}";
         
         if (levelText != null)
             levelText.text = $"Level: {currentLevel}";
