@@ -89,10 +89,7 @@ public class NPCController : MonoBehaviour {
             animator.SetBool(idleParameterName, false);
         }
 
-        // Play walking sounds
-        if (soundManager != null) {
-            soundManager.PlayFootstepSound();
-        }
+        SoundManager.Instance.PlaySound("footstep");
     }
 
     void StopWalking() {
@@ -122,8 +119,8 @@ public class NPCController : MonoBehaviour {
 
     // Method to initiate exit movement
     public void MoveToExit() {
-        hasReachedExit = false;
         MoveToTarget(deliveryPoint.position);
+        hasReachedExit = false;
     }
 
     // Method to check if NPC has reached exit

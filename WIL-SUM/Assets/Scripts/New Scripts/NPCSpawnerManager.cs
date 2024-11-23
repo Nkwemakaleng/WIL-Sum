@@ -13,7 +13,7 @@ public class NPCSpawnerManager : MonoBehaviour
     [Header("UI References")] public GameObject officerAssignmentPanel; // Panel for officer selection
     public TMP_Text crimeDescriptionText; // Displays current crime details
     public TMP_Text crimeLevelText; // Shows crime severity
-    public TMP_Text officersRequiredText; // Shows recommended officer count
+   // public TMP_Text officersRequiredText; // Shows recommended officer count
     public TMP_Text timeRemainingText;
 
     [Header("Officer Selection")] public Slider officerAssignmentSlider; // UI slider to select officer count
@@ -78,40 +78,58 @@ public class NPCSpawnerManager : MonoBehaviour
             // Subscribe to the OnReachedDesk event
             npcController.OnReachedDesk += HandleNPCReachedDesk;
             npcController.MoveToPlayerDesk();
+            npcAtDesk = true;
         }
 
-        //PrepareAssignmentUI(crime);
+        PrepareAssignmentUI(currentCrime);
     }
 
     // New method to handle NPC reaching the desk
     private void HandleNPCReachedDesk()
     {
         npcAtDesk = true;
-        PrepareAssignmentUI(currentCrime);
+       
     }
 
+   
 
     void PrepareAssignmentUI(CrimeReport crime)
     {
 
         // Only show UI if NPC has reached desk
-        if (!npcAtDesk) return;
+      if (!npcAtDesk) return;
+        
+        officerAssignmentSlider.interactable = true;
 
         // Configure slider based on available officers and crime requirements
         officerAssignmentSlider.minValue = 1;
         officerAssignmentSlider.maxValue = Mathf.Min(
-            gameManager.availableOfficers,
-            crime.officersRequired + 2 // Allow some flexibility in officer selection
+            gameManager.availableOfficers, 
+            crime.officersRequired + 2  // Allow some flexibility in officer selection
         );
-        officerAssignmentSlider.value = crime.officersRequired;
+        
+        officerAssignmentSlider.value = Mathf.Min(
+            gameManager.availableOfficers);
+        
+        
+        officerAssignmentSlider.onValueChanged.AddListener(UpdateSelectedOfficers);
 
         // Update UI texts with crime details
         crimeDescriptionText.text = $"Crime: {crime.crimeDescription}";
         crimeLevelText.text = $"Severity: {crime.level}";
-        officersRequiredText.text = $"Recommended Officers: {crime.officersRequired}";
+       // officersRequiredText.text = $"Recommended Officers: {crime.officersRequired}";
 
         officerAssignmentPanel.SetActive(true);
+        
+        if (officerAssignmentPanel.GetComponent<CanvasGroup>() != null)
+        {
+            var canvasGroup = officerAssignmentPanel.GetComponent<CanvasGroup>();
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
+            canvasGroup.alpha = 1f;
+        }
         StartCrimeTimeout();
+        
 
     }
 
@@ -164,6 +182,7 @@ public class NPCSpawnerManager : MonoBehaviour
                 // npcController.OnReportAccepted();
                 StartCoroutine(HandleNPCDeparture(npcController));
             }
+            SoundManager.Instance.PlaySound("report");
 
 
             /* Start crime resolution process
